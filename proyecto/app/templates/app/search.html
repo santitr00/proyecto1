@@ -1,0 +1,53 @@
+{% extends 'app/index.html' %}
+
+{% block title %}Buscar{% endblock %}
+
+{% block content %}
+<h2>Buscar</h2>
+<form method="get" action="{% url 'search' %}">
+    <input type="text" name="query" placeholder="Buscar...">
+    <button type="submit">Buscar</button>
+</form>
+
+{% if clientes or productos or proveedores %}
+    <div class="search-results">
+        {% if clientes %}
+            <h3>Clientes, productos y proveedores</h3>
+            <ol>
+                {% for cliente in clientes %}
+                    <li>
+                        {{ cliente.nombre }} - {{ cliente.email }} - {{ cliente.telefono }}
+                        <a href="{% url 'delete_cliente' cliente.id %}" class="delete-btn">Eliminar</a>
+                    </li>
+                {% endfor %}
+            </ol>
+        {% endif %}
+
+        {% if productos %}
+            <h3>Productos</h3>
+            <ol>
+                {% for producto in productos %}
+                    <li>
+                        {{ producto.nombre }} - {{ producto.descripcion }} - ${{ producto.precio }}
+                        <a href="{% url 'delete_producto' producto.id %}" class="delete-btn">Eliminar</a>
+                    </li>
+                {% endfor %}
+            </ol>
+        {% endif %}
+
+        {% if proveedores %}
+            <h3>Proveedores</h3>
+            <ol>
+                {% for proveedor in proveedores %}
+                    <li>
+                        {{ proveedor.nombre }} - {{ proveedor.direccion }} - {{ proveedor.telefono }}
+                        <a href="{% url 'delete_proveedor' proveedor.id %}" class="delete-btn">Eliminar</a>
+                    </li>
+                {% endfor %}
+            </ol>
+        {% endif %}
+    </div>
+{% else %}
+    <p>No se encontraron resultados.</p>
+{% endif %}
+{% endblock %}

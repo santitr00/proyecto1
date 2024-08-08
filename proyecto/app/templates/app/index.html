@@ -1,0 +1,14 @@
+{% extends 'app/base.html' %}
+
+{% block title %}INICIO{% endblock %}
+
+{% block content %}
+    <section>
+        <h2>Bienvenido al registro de datos</h2>
+        <p>Elija </p>
+        <a href="{% url 'clientes' %}">Add Cliente</a>
+        <a href="{% url 'proveedores' %}">Add Proveedor</a>
+        <a href="{% url 'productos' %}">Add Producto</a>
+        <a href="{% url 'search' %}">Search</a>
+    </section>
+{% endblock %}
